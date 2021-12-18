@@ -1,0 +1,39 @@
+<%-include('./layouts/header')%>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="h1 text-center">Log In</div><hr>
+                <form  action='/users/login' method='POST' class="formValidation" novalidate>
+                    <label class="control-label" for="username">Username</label>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <input class="form-control" id="username"  type='text' name='username' placeholder= "Username" required></input>
+                    </div><br>
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <input class="form-control" id="password"  type='password' name='password' placeholder="Password" required></input>
+                    </div><br>
+                    <button type="submit" class="btn btn-primary btn-block">LogIn</button>
+                </form><br>
+                <p>
+                    New User?
+                    <a href="/users/register">Register</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%-include('./layouts/footer')%>

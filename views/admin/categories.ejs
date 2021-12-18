@@ -1,0 +1,32 @@
+<%- include('../layouts/adminheader') %>
+
+<div class="container">
+    <h1 class="page-title">Categories</h1>
+    <a href="/admin/categories/add-category" class="btn btn-primary">Add a new category</a><br><br>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for(let cat of categories) { %>
+                <tr>
+                    <td><%= cat.title %></td>
+                    <td><a class="btn btn-warning" href="categories/edit-category/<%= cat._id %>">Edit</a></td>
+                    <td>
+                        <form action="categories/delete-category/<%= cat._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-danger confirm-deletion">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+          <% } %>
+        </tbody>
+    </table>
+</div>
+
+
+<%- include('../layouts/adminfooter') %>

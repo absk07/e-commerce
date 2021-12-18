@@ -1,0 +1,38 @@
+<%- include('./layouts/header') %>
+
+<div class="container">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">Fast Delivery</h1>
+            <p class="lead">Now no more waiting.</p> 
+            <p class="lead">Get your favourite products within a couple of days with us.</p>
+            <img src="https://images-eu.ssl-images-amazon.com/images/G/31/Gateway/Zeitgeist/Mar20/Covid19/May4/IN_GWD_Covid19_CustomerMsg_May4_GREENZONE_ENG_1X_V2._CB432638652_.jpg" alt="" class="img-fluid">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <% if(product.length === 0) { %>
+        <h1 class="text-center">No Products</h1>
+    <% } %>      
+    <div class="row">
+        <% for(let pro of product) { %>
+            <div class="col-12 col-md-3" style="margin-bottom: 20px;">
+                <div class="card">
+                    <% if(pro.images == '') { %>
+                        <img src="/images/noimage.png" alt="product image" style="height: 200px;">
+                    <% } else { %>    
+                        <img src="<%=pro.images[0].url%>" alt="product image" style="height: 200px;">
+                    <% } %>    
+                    <div class="card-body">
+                      <h5 class="card-title"><%=pro.title%></h5>
+                      <em class="pull-left">&#x20B9;<%= pro.price %></em><hr>
+                      <a href="/products/<%= pro.category %>/<%= pro.slug %>" class="btn btn-primary btn-block">More Info</a>
+                    </div>
+                </div>
+            </div>
+        <% } %>   
+    </div>
+</div>
+
+
+<%- include('./layouts/footer') %>

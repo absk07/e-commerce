@@ -1,0 +1,63 @@
+<%- include('../layouts/adminheader') %>
+
+<div class="container">
+    <h1 class="page-title">Edit a Product</h1>
+    
+    <form action="/admin/products/edit-product/<%=product._id%>?_method=PUT" method="POST" id="postEditForm" enctype="multipart/form-data" class="formValidation" novalidate>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" id="title" name="title" value="<%=product.title%>" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" value="<%=product.price%>" required>
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select name="category" class="form-control" id="category" required>
+                <% for(let cat of category) { %>
+                    <option value="<%= cat.slug %>"><%= cat.title %></option>
+                <% } %>
+            </select>
+        </div><br>
+        <div class="input-group">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="imageUpload" name="images" accept="image/*" multiple>
+                <label class="custom-file-label" for="imageUpload">Choose file</label>
+            </div>
+        </div>
+        <div class="container my-3">
+            <div class="row">
+                <% product.images.forEach(function(image, i) { %>
+                    <div class="col-sm-3">
+                        <img src="<%=image.url%>" style="height: 80px; width: 80px;">
+                        <label for="image<%= i %>">Delete?</label>
+                        <input type="checkbox" id="image<%= i %>" name="deleteImages[]" class="imageDeleteCheckbox" value="<%= image.filename %>">
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ta">Description</label>
+            <textarea class="form-control" id="ta" rows="6" name="description"><%=product.description%></textarea>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<script>
+    let postEditForm = document.getElementById('postEditForm');
+    postEditForm.addEventListener('submit', function(event) {
+        let imageUploads = document.getElementById('imageUpload').files.length;
+        let existingImgs = document.querySelectorAll('.imageDeleteCheckbox').length;
+        let imgDeletions = document.querySelectorAll('.imageDeleteCheckbox:checked').length;
+        let newTotal = existingImgs - imgDeletions + imageUploads;
+        if(newTotal > 5) {
+            event.preventDefault();
+            let removalAmt = newTotal - 5;
+            alert(`You need to remove at least ${removalAmt} (more) image${removalAmt === 1 ? '' : 's'}!`);
+        }   
+    });
+</script>
+
+<%- include('../layouts/adminfooter') %>

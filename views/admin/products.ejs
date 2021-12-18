@@ -1,0 +1,50 @@
+<%- include('../layouts/adminheader') %>
+
+<div class="container">
+    <h1 class="page-title">Products</h1>
+    <a href="/admin/products/add-product" class="btn btn-primary">Add a new product</a><br><br>
+
+    <% if(products) { %>
+        <table class="table table-striped">
+            <thead>
+            <tr class="home">
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Product Image</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+                <% for(let pro of products) { %>
+                    <tr>
+                        <td><%= pro.title %></td>
+                        <td>&#x20B9;<%= pro.price %></td>
+                        <td><%= pro.category %></td>
+                        <td>
+                            <% if(pro.images == "") { %>
+                                <img class="pro_img" src="/images/noimage.png" alt="" style="width: 80px; height: 80px;">
+                            <% } else { %>
+                                <% for(let image of pro.images) { %>
+                                    <img src="<%=image.url%>" style="height: 80px; width: 80px;">
+                                <% } %>
+                            <% } %>   
+                        </td>    
+                        <td><a class="btn btn-warning" href="products/edit-product/<%= pro._id %>">Edit</a></td>
+                        <td>
+                            <form action="products/delete-product/<%= pro._id %>?_method=DELETE" method="POST">
+                                <button class="btn btn-danger confirm-deletion">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+            <% } %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <hr>
+        <h2 class="text-center">No Products !</h2>
+    <% } %>        
+</div>
+
+<%- include('../layouts/adminfooter') %>

@@ -1,0 +1,37 @@
+<%- include('./layouts/header') %>
+
+
+<div class="container mb-5">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="page-header"><%= product.title %></h1><hr>
+            <div>
+                <% if(product.images == "") { %>
+                    <img class="pro_img" src="/images/noimage.png" class="img-thumbnail">
+                <% } else { %>
+                    <img src="<%=product.images[0].url%>" class="img-fluid img-thumbnail"  style="width: 500px; height: 500px;">
+                <% } %>   
+            </div><br>
+            <div class="row">
+                <% if(product.images == "") { %>
+                    <img class="pro_img" src="/images/noimage.png" alt="" style="width: 100px; height: 100px;">
+                <% } else { %>
+                    <% for(let image of product.images) { %>
+                        <div class="col">
+                            <img src="<%= image.url %>" class="img-thumbnail" style="width: 100px; height: 100px;">
+                        </div>
+                    <% } %>
+                <% } %>   
+            </div>
+        </div>
+        <div class="col-sm-4 mt-5">
+            <p><em>Description:</em> <%- product.description %></p>
+            <p><em>Price:</em> &#x20B9;<%= product.price %></p>
+            <p><a href="/cart/add/<%= product.slug %>">Add to cart</a></p>
+        </div>
+    </div>
+    
+</div>
+
+
+<%- include('./layouts/footer') %>

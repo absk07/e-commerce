@@ -1,0 +1,57 @@
+<%-include('./layouts/header')%>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <div class="h1 text-center">Register</div><hr>
+                <form  action='/users/register' method='POST' class="formValidation" novalidate>
+                    <label class="control-label" for="name">Full name</label>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <input class="form-control" id="name"  type='text' name='name' placeholder= "Full Name" required></input>
+                    </div><br>
+                    <label class="control-label" for="email">Email</label>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-envelope-square aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <input class="form-control" id="email"  type='email' name='email' placeholder= "Email" required></input>
+                    </div><br>
+                    <label class="control-label" for="username">Username</label>
+                    <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <input class="form-control" id="username"  type='text' name='username' placeholder= "Username" required></input>
+                    </div><br>
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <input class="form-control" id="password"  type='password' name='password' placeholder="Password" required></input>
+                    </div><br>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                </form><br>
+                <p>
+                    Already registered?
+                    <a href="/users/login">Log In</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%-include('./layouts/footer')%>
